@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ale.haritos.projeto1_Springboot.entities.Proprietario;
+import ale.haritos.projeto1_Springboot.entities.Veiculos;
 import ale.haritos.projeto1_Springboot.exceptions.NotFound;
 import ale.haritos.projeto1_Springboot.repositories.ProprietarioRepository;
 
@@ -28,6 +29,12 @@ public class ProprietarioService {
 	
 	public Proprietario insert(Proprietario p) {
 		return repository.save(p);
+	}
+	
+	public void addVeiculos(Veiculos v) {
+		Proprietario p = findById(v.getProprietarioDTO().getId());
+		p.getVeiculos().add(v);
+		repository.save(p);
 	}
 	
 }
