@@ -22,4 +22,13 @@ public class Handler {
 		return ResponseEntity.status(status).body(se);
 	}
 	
+	@ExceptionHandler(BadRequest.class)
+	public ResponseEntity<StandardException> badRequest(BadRequest e, HttpServletRequest request) {	
+		String error = "Bad request";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		StandardException se = new StandardException(Instant.now(), error, e.getMessage(), request.getRequestURI(), status.value());
+		
+		return ResponseEntity.status(status).body(se);
+	}
 }

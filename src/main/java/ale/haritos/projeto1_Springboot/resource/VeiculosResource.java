@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import ale.haritos.projeto1_Springboot.dto.MultasDTO;
-import ale.haritos.projeto1_Springboot.dto.ProprietarioDTO;
-import ale.haritos.projeto1_Springboot.entities.Proprietario;
 import ale.haritos.projeto1_Springboot.entities.Veiculos;
 import ale.haritos.projeto1_Springboot.services.ProprietarioService;
 import ale.haritos.projeto1_Springboot.services.VeiculoService;
@@ -44,22 +41,21 @@ public class VeiculosResource {
 	
 	@PostMapping
 	public ResponseEntity<Veiculos> insertVeiculo(@RequestBody Veiculos v) {
-		v = service.insertVeiculo(v);
+		v = service.createVeiculo(v);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(v.getId()).toUri();
 		return ResponseEntity.created(uri).body(v);
 	}
 	
 	@PostMapping(value = "/{id}")
 	public ResponseEntity<Veiculos> insertVeiculoComProprietario(@PathVariable String id, @RequestBody Veiculos v) {
-		Proprietario p = propService.findById(id);
-		v.setProprietarioDTO(new ProprietarioDTO(p));
+		v = service.insertVeiculo(id, v);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(v.getId()).toUri();
 		return ResponseEntity.created(uri).body(v);
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Veiculos> addMulta(@PathVariable String id, @RequestBody MultasDTO multa) {
-		Veiculos v = service.addMulta(id, multa);
+	@PutMapping(value = "/{id}/multa/{cod}")
+	public ResponseEntity<Veiculos> addMulta(@PathVariable("id") String id, @PathVariable("cod") Integer code) {
+		Veiculos v = service.addMulta(id, code);
 		return ResponseEntity.ok(v);
 		
 	}

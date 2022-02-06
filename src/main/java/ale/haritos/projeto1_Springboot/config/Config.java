@@ -1,6 +1,5 @@
 package ale.haritos.projeto1_Springboot.config;
 
-import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +38,8 @@ public class Config implements CommandLineRunner{
 		
 		veiRepo.saveAll(Arrays.asList(v1,v2));
 		
-		v1.getMultas().add(new MultasDTO(Instant.now(), 1));
-		v1.getMultas().add(new MultasDTO(Instant.now(), 2));
+		v1.getMultas().add(new MultasDTO(1));
+		v1.getMultas().add(new MultasDTO(2));
 		
 		veiRepo.saveAll(Arrays.asList(v1,v2));
 		

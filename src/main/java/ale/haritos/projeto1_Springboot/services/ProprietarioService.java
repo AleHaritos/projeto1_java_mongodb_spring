@@ -31,8 +31,7 @@ public class ProprietarioService {
 		return repository.save(p);
 	}
 	
-	public void addVeiculos(Veiculos v) {
-		Proprietario p = findById(v.getProprietarioDTO().getId());
+	public void addVeiculos(Proprietario p, Veiculos v) {
 		p.getVeiculos().add(v);
 		repository.save(p);
 	}

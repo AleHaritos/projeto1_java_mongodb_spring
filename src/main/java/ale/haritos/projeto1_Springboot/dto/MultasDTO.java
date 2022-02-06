@@ -16,9 +16,9 @@ public class MultasDTO implements Serializable{
 		
 	}
 
-	public MultasDTO(Instant data, Integer tipoMulta) {
+	public MultasDTO(Integer tipoMulta) {
 		super();
-		this.data = data;
+		this.data = Instant.now();
 		this.tipoMulta = TipoMultas.valueOf(tipoMulta);
 	}
 
@@ -36,6 +36,11 @@ public class MultasDTO implements Serializable{
 
 	public void setTipoMultas(Integer tipoMulta) {
 		this.tipoMulta = TipoMultas.valueOf(tipoMulta);
+	}
+
+	@Override
+	public String toString() {
+		return "MultasDTO [data=" + data + ", tipoMulta=" + tipoMulta + "]";
 	}
 	
 	
